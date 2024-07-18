@@ -3,7 +3,7 @@ FROM node
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN npm install
+RUN yarn install
 
 COPY tsconfig.json ./
 COPY webpack.config.js ./
