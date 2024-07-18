@@ -87,7 +87,7 @@ export function handleFormSubmit() {
 
         console.log('dataSheetFinal', dataSheetFinal)
 
-        const response = await fetch('http://52.91.252.146:3333/api/upload', {
+        const response = await fetch('http://44.212.23.26:3333//api/upload', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
