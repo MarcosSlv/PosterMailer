@@ -21,5 +21,5 @@ app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use(router);
 
 app.listen(port, () => {
-  console.log(`Front-end is running on http://44.212.23.26:5533/:${port}`);
+  console.log(`Front-end is running on http://44.212.23.26:${port}`);
 });
