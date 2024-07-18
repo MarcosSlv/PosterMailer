@@ -11,8 +11,6 @@ RUN yarn install
 COPY src ./src
 COPY public ./public
 
-RUN yarn
-
 EXPOSE 5533
 
 CMD [ "yarn", "start" ]
