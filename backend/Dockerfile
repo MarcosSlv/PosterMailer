@@ -2,13 +2,13 @@ FROM node
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 COPY tsconfig.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY src ./src
 
 EXPOSE 3333
 
-CMD [ "npm", "run", "start" ]
+CMD [ "yarn", "start" ]
