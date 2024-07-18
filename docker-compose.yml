@@ -4,8 +4,8 @@ services:
   backend:
     build:
       context: ./backend
-    expose:
-      - "3333"
+    ports:
+      - "3333:3333"
     volumes:
       - ./backend/src:/app/src
       - ./backend/tsconfig.json:/app/tsconfig.json
@@ -17,8 +17,8 @@ services:
   frontend:
     build:
       context: ./frontend
-    expose:
-      - "5533"
+    ports:
+      - "5533:5533"
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public:/app/public

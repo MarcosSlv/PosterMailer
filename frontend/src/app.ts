@@ -4,7 +4,7 @@ import { engine } from 'express-handlebars'
 import { router } from './routes';
 
 const app = express();
-const port = 40;
+const port = 5533;
 
 app.engine('hbs', engine({
   extname: '.hbs',
