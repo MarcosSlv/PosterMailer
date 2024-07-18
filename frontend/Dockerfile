@@ -3,10 +3,11 @@ FROM node
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-COPY tsconfig.json ./
-COPY webpack.config.js ./
 
 RUN yarn install
+
+COPY tsconfig.json ./
+COPY webpack.config.js ./
 
 COPY src ./src
 COPY public ./public
