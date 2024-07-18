@@ -10,7 +10,7 @@ services:
       - ./backend/src:/app/src
       - ./backend/tsconfig.json:/app/tsconfig.json
       - ./backend/package.json:/app/package.json
-      - ./backend/package-lock.json:/app/package-lock.json
+      - ./backend/yarn.lock:/app/yarn.lock
     depends_on:
       - frontend
 
@@ -24,5 +24,5 @@ services:
       - ./frontend/public:/app/public
       - ./frontend/tsconfig.json:/app/tsconfig.json
       - ./frontend/package.json:/app/package.json
-      - ./frontend/package-lock.json:/app/package-lock.json
+      - ./frontend/yarn.lock:/app/yarn.lock
       - ./frontend/webpack.config.js:/app/webpack.config.js
