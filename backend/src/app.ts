@@ -7,7 +7,7 @@ const app = express();
 const port = 3333;
 
 app.use(cors({
-  origin: 'http://localhost:5533'
+  origin: '*'
 }));
 
 app.use('/pdfs', express.static(path.resolve(__dirname, '../pdfs')));
