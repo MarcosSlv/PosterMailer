@@ -4,7 +4,7 @@ import cors from 'cors';
 import path from 'path';
 
 const app = express();
-const port = 3333;
+const port = 443;
 
 app.use(cors({
   origin: '*'
@@ -16,5 +16,5 @@ app.use(express.json({limit: '20mb'}));
 app.use('/api', router);
 
 app.listen(port, () => {
-  console.log(`Back-end is running on https://52.91.252.146:${port}`);
+  console.log(`Back-end is running on  https://52.91.252.146:${port}`);
 });
