@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR /app
 
-COPY package.json packagelock.json ./
+COPY package.json yarn.lock ./
 RUN npm install
 
 COPY tsconfig.json ./
