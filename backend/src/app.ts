@@ -16,5 +16,5 @@ app.use(express.json({limit: '20mb'}));
 app.use('/api', router);
 
 app.listen(port, () => {
-  console.log(`Back-end is running on  http://44.212.23.26:${port}`);
+  console.log(`Back-end is running on  http://44.201.136.185:${port}`);
 });
