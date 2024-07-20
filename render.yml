@@ -1,28 +1,24 @@
-version: '3.8'
-
 services:
-  backend:
-    build:
-      context: ./backend
-    ports:
-      - "3333:3333"
-    volumes:
-      - ./backend/src:/app/src
-      - ./backend/tsconfig.json:/app/tsconfig.json
-      - ./backend/package.json:/app/package.json
-      - ./backend/yarn.lock:/app/yarn.lock
-    depends_on:
-      - frontend
+  - name: backend
+    type: web
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "3333"
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
+    plan: free
 
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "5533:5533"
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
-      - ./frontend/tsconfig.json:/app/tsconfig.json
-      - ./frontend/package.json:/app/package.json
-      - ./frontend/yarn.lock:/app/yarn.lock
-      - ./frontend/webpack.config.js:/app/webpack.config.js
+  - name: frontend
+    type: web
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "5533"
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
+    plan: free
