@@ -20,9 +20,9 @@ Esse projeto foi desenvolvido para agilizar o processo de criação de cartazes 
 
 1. Clone o repositório:
 
-   ```bash
-   git clone https://github.com/PosterMailer
-   
+  ```bash
+  git clone https://github.com/PosterMailer
+  ```
 2. Instale as dependências:
 
    
