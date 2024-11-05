@@ -21,15 +21,21 @@ Esse projeto foi desenvolvido para agilizar o processo de criação de cartazes 
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-
+   git clone https://github.com/PosterMailer
+   
 2. Instale as dependências:
-```bash
-yarn install
 
-3. Execute o projeto:
-```bash
-yarn dev
+   
+  ```bash
+  cd PosterMailer-front-end
+  yarn install
+  cd PosterMailer-back-end
+  yarn install
+  ```
 
-
-
+3. Execute o Projeto:
+  ```bash
+  cd PosterMailer-front-end
+  yarn dev
+  cd PosterMailer-back-end
+  yarn dev
