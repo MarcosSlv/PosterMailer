@@ -8,7 +8,7 @@ Esse projeto foi desenvolvido para agilizar o processo de criação de cartazes 
   O sistema permite criar cartazes de promoção de forma rápida e personalizada. Com base nas informações de produtos e preços, é possível gerar cartazes prontos para impressão.
   
 - **Envio de E-mails de Cobrança**  
-  Além dos cartazes, a aplicação também automatiza o envio de e-mails de cobrança para fornecedores, garantindo que as pendências financeiras sejam notificadas de forma prática e eficiente.
+  Além dos cartazes, a aplicação também possibilita o envio de e-mails de cobrança para fornecedores, garantindo que as pendências financeiras sejam notificadas de forma prática e eficiente.
 
 ## Tecnologias Utilizadas
 
