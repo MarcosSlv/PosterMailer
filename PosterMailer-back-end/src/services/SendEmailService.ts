@@ -5,7 +5,7 @@ class SendEmailService {
   async execute(emails: emailContent[]) {
     for (const emailData of emails) {
       const emailOptions = {
-        from: process.env.GMAIL_USER,
+        from: process.env.EMAIL_USER,
         to: emailData.destinatario,
         subject: "Lembrete de Cobrança - Comercial de Alimentos Caíque LTDA",
         template: "email",
