@@ -33,6 +33,28 @@ Esse projeto foi desenvolvido para agilizar o processo de criação de cartazes 
   yarn install
   ```
 
+
+## Configuração de Variáveis de Ambiente
+
+Este projeto utiliza variáveis de ambiente para configurar alguns serviços, como o envio de e-mails. Para rodar a aplicação corretamente, crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis:
+
+| Variável        | Descrição                                                  | Exemplo                          |
+|-----------------|------------------------------------------------------------|----------------------------------|
+| `EMAIL_USER`    | Endereço de e-mail usado para enviar notificações           | `seu_email@email.com`            |
+| `EMAIL_PASS`    | Senha ou App Password para autenticação do e-mail           | `sua_senha_ou_app_password`      |
+| `PORT`          | Porta onde o servidor deve rodar (opcional)                 | `3333`                           |
+
+### Exemplo do Arquivo `.env`
+
+Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+
+```plaintext
+GMAIL_USER=seu_email@email.com
+GMAIL_PASS=sua_senha_ou_app_password
+PORT=3333
+```
+
+
 3. Execute o Projeto:
   ```bash
   cd PosterMailer-front-end
