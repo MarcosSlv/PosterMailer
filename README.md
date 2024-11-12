@@ -49,8 +49,8 @@ Este projeto utiliza variáveis de ambiente para configurar alguns serviços, co
 Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
 
 ```plaintext
-GMAIL_USER=seu_email@email.com
-GMAIL_PASS=sua_senha_ou_app_password
+EMAIL_USER=seu_email@email.com
+EMAIL_PASS=sua_senha_ou_app_password
 PORT=3333
 ```
 
