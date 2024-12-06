@@ -8,21 +8,21 @@ import { SegmentedControl } from "@radix-ui/themes";
 import useSheetReader from "../../hooks/useSheetReader";
 import { MdDownload } from "react-icons/md";
 
-
 function PosterForm() {
-  const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue, watch, reset } = useForm();
+  const [typeForm, setTypeForm] = useState("unico");
+  const [fadeTransition, setFadeTransition] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState("");
   const [reqResponse, setReqResponse] = useState("");
-
 
   const image = "public/assets/images/tabela-modelo-cartazes.png";
   const modelFilePath = "public/assets/sheets/modelo-cartaz.xlsx";
 
   const fileWatch = watch('file');
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "cartazes");
-  console.log(dataArray);
 
+  console.log(dataArray);
   useEffect(() => {
     setValue("tamanho", "cartaz-grande");
     setDownloadUrl("");
@@ -32,30 +32,53 @@ function PosterForm() {
   const onSubmit = async (data) => {
     setDownloadUrl("");
     setReqResponse("");
+    console.log(data);
+    console.log(typeForm);
+
+    console.log(data.produto);
+
+    const body = typeForm === "planilha"
+      ? { tamanho: data.tamanho, sheet: dataArray }
+      : {
+        tamanho: data.tamanho, sheet: [
+          {
+            produto: data.produto,
+            preco: data.preco,
+            medida: data.medida,
+            limite: data.limite
+          }
+        ]
+      };
 
     try {
+
+      console.log(body);
+
       const response = await fetch('http://localhost:3333/api/posters', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ tamanho: data.tamanho, sheet: dataArray })
+        body: JSON.stringify(body)
       });
 
       const responseData = await response.json();
-      console.log(responseData);
-
       if (responseData.status === "Success") {
         setDownloadUrl(responseData.download);
         setReqResponse(responseData.message);
+        reset();
       }
     } catch (err) {
-      console.log("Erro ao criar cartaz: ", err);
+      console.error("Erro ao criar cartaz: ", err);
     }
   };
 
+  const handleTypeChange = (value) => {
+    setTypeForm(value);
+    setDownloadUrl("");
+  };
+
   const handleSizeChange = (value) => {
-    console.log(value);
     setValue("tamanho", value);
     setDownloadUrl("");
   };
@@ -64,22 +87,109 @@ function PosterForm() {
   const closeHelpModal = () => setIsModalOpen(false);
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <h2 className="text-center text-3xl font-bold mb-4 text-gray-800">Criação de Cartaz</h2>
-        <div className="mb-5">
-          <label className="block text-gray-600 mb-2 text-center">Selecione o Arquivo</label>
-          <Input
-            type="file"
-            name="file"
-            placeholder="Selecione o arquivo"
-            accept=".xlsx, .xls, .csv"
-            register={register}
-            validation={{ required: 'O arquivo é obrigatório' }}
-          />
-          {errors.file && <p className="text-center text-red-500 text-sm mt-1 w-full">{errors.file.message}</p>}
-          {error && <p className="text-center text-red-500 text-sm mt-1 w-full">{error}</p>}
+        <div className="flex justify-center">
+          <SegmentedControl.Root
+            value={typeForm}
+            onValueChange={handleTypeChange}
+            className="flex justify-center"
+            size="3"
+          >
+            <SegmentedControl.Item value="unico" className="px-6 py-2 bg-gray-200 rounded-md hover:bg-gray-300">Cartaz único</SegmentedControl.Item>
+            <SegmentedControl.Item value="planilha" className="px-6 py-2 bg-gray-200 rounded-md hover:bg-gray-300">Planilha</SegmentedControl.Item>
+          </SegmentedControl.Root>
         </div>
+        {typeForm === "unico" && (
+          <div className="space-y-4">
+            <div className="flex flex-col items-center">
+              <label htmlFor="produto" className="block text-gray-600 mb-2 text-center">Produto</label>
+              <Input
+                type="text"
+                name="produto"
+                placeholder="Descrição do Produto"
+                register={register}
+                validation={{ required: 'A descrição é obrigatória' }}
+                className="w-full text-center"
+              />
+              {errors.produto && <p className="text-red-500 text-sm text-center">{errors.produto.message}</p>}
+            </div>
+
+            <div className="flex items-start">
+              <div className="flex flex-col items-center w-1/2">
+                <label htmlFor="preco" className="block text-gray-600 mb-1 text-center">Preço</label>
+                <Input
+                  type="number"
+                  name="preco"
+                  step="0.01"
+                  register={register}
+                  validation={{
+                    required: 'O preço é obrigatório',
+                    min: { value: 0, message: 'O preço deve ser maior que 0' }
+                  }}
+                  className="w-28 text-center border border-gray-300 rounded-md p-2"
+                />
+                {errors.preco && <p className="text-red-500 text-sm text-center mt-1">{errors.preco.message}</p>}
+              </div>
+
+              <div className="flex flex-col items-center w-1/2">
+                <label htmlFor="medida" className="block text-gray-600 mb-1 text-center">Medida</label>
+                <select
+                  id="medida"
+                  {...register("medida", { required: 'A medida é obrigatória' })}
+                  className="w-28 border border-gray-300 rounded-md p-2"
+                >
+                  <option value="UN">UN</option>
+                  <option value="KG">KG</option>
+                </select>
+                {errors.medida && <p className="text-red-500 text-sm text-center mt-1">{errors.medida.message}</p>}
+              </div>
+
+              <div className="flex flex-col items-center w-1/2">
+                <label htmlFor="limite" className="block text-gray-600 mb-2 text-center">Limite</label>
+                <Input
+                  type="text"
+                  name="limite"
+                  placeholder="Limite?"
+                  register={register}
+                  className="w-28 border border-gray-300 rounded-md p-2"
+                />
+                {errors.limite && <p className="text-red-500 text-sm text-center">{errors.limite.message}</p>}
+              </div>
+            </div>
+
+            {/* <div>
+              <label htmlFor="medida" className="block text-gray-600 mb-2 text-center">Medida</label>
+              <select
+                id="medida"
+                {...register("medida", { required: 'A medida é obrigatória' })}
+                className="block mx-auto p-2 border border-gray-300 rounded-md"
+              >
+                <option value=""></option>
+                <option value="KG">KG</option>
+                <option value="UN">UN</option>
+              </select>
+              {errors.medida && <p className="text-red-500 text-sm text-center">{errors.medida.message}</p>}
+            </div> */}
+          </div>
+        )}
+
+        {typeForm === "planilha" && (
+          <div>
+            <label className="block text-gray-600 mb-2 text-center">Selecione o Arquivo</label>
+            <Input
+              type="file"
+              name="file"
+              placeholder="Selecione o arquivo"
+              accept=".xlsx, .xls, .csv"
+              register={register}
+              validation={{ required: 'O arquivo é obrigatório' }}
+            />
+            {errors.file && <p className="text-red-500 text-sm">{errors.file.message}</p>}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+          </div>
+        )}
 
         <div className="mb-5">
           <h5 className="text-center text-lg font-medium text-gray-600 mb-3">Qual o Modelo do Cartaz?</h5>
@@ -97,10 +207,10 @@ function PosterForm() {
                 Cartaz Pequeno - A5
               </SegmentedControl.Item>
             </SegmentedControl.Root>
-            {errors.tamanho && <p className="text-center text-red-500 text-sm mt-1 w-full">{errors.tamanho.message}</p>}
+            {errors.tamanho && <p className="text-red-500 text-sm mt-1">{errors.tamanho.message}</p>}
           </div>
-
         </div>
+
 
         <div className="text-center">
           {dataLoading ? (
@@ -112,7 +222,7 @@ function PosterForm() {
             <FormButton type="submit" text="Criar Cartaz" disabled={error || dataLoading || downloadUrl} />
           )}
         </div>
-      </form >
+      </form>
       {downloadUrl && (
         <div>
           <p className="text-center mt-4 text-green-500">{reqResponse} Clique no botão abaixo para fazer o download</p>
@@ -120,8 +230,8 @@ function PosterForm() {
             <FormButton text={<MdDownload className="mr-1 text-xl" />} />
           </a>
         </div>
-
       )}
+
       <div className="flex justify-center my-2 py-2">
         <label className="form-label-custom fs-2">
           Dúvidas quanto ao Layout? <a
@@ -140,8 +250,8 @@ function PosterForm() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"></div>
       )}
-    </div >
+    </div>
   );
-};
+}
 
 export default PosterForm;

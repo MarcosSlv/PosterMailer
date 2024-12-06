@@ -8,7 +8,7 @@ const useSheetReader = (sheet, type) => {
 
   const expectedTypes = ["cartazes", "emails"];
 
-  const expectedHeadersForPosters = ["produto", "medida", "preco"];
+  const expectedHeadersForPosters = ["produto", "medida", "preco", "limite"];
   const expectedHeadersForEmails = ["destinatario", "fornecedor", "valor", "metodo", "vencimento", "referencia"];
 
   useEffect(() => {

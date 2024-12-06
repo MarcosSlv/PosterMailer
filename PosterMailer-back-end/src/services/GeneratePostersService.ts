@@ -64,7 +64,7 @@ class GeneratePostersService {
             absolutePosition: { x: 17, y: 720 },
           },
           {
-            text: row.preco,
+            text: row.preco.replace(".", ","),
             bold: true,
             fontSize: 170,
             alignment: "center",
@@ -76,10 +76,21 @@ class GeneratePostersService {
             fontSize: 30,
             alignment: "right",
             absolutePosition: { x: 0, y: 720 },
-          }
+          },
+
         ],
         margin: [0, 0, 0, 20],
       };
+
+      if (row.limite) {
+        pageContent.stack.push({
+          text: `LIMITADO A ${row.limite} POR CLIENTE`,
+          bold: true,
+          fontSize: 24,
+          alignment: "center",
+          absolutePosition: { x: 10, y: 760 }
+        });
+      }
 
       if (index < data.length - 1) {
         pageContent.stack.push({ text: "", pageBreak: "after" });
