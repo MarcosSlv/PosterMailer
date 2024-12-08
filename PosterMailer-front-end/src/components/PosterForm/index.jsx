@@ -22,7 +22,6 @@ function PosterForm() {
   const fileWatch = watch('file');
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "cartazes");
 
-  console.log(dataArray);
   useEffect(() => {
     setValue("tamanho", "cartaz-grande");
     setDownloadUrl("");
@@ -123,6 +122,7 @@ function PosterForm() {
                   type="number"
                   name="preco"
                   step="0.01"
+                  placeholder="9,99"
                   register={register}
                   validation={{
                     required: 'O preço é obrigatório',
@@ -151,27 +151,13 @@ function PosterForm() {
                 <Input
                   type="text"
                   name="limite"
-                  placeholder="Limite?"
+                  placeholder="02 UN."
                   register={register}
                   className="w-28 border border-gray-300 rounded-md p-2"
                 />
                 {errors.limite && <p className="text-red-500 text-sm text-center">{errors.limite.message}</p>}
               </div>
             </div>
-
-            {/* <div>
-              <label htmlFor="medida" className="block text-gray-600 mb-2 text-center">Medida</label>
-              <select
-                id="medida"
-                {...register("medida", { required: 'A medida é obrigatória' })}
-                className="block mx-auto p-2 border border-gray-300 rounded-md"
-              >
-                <option value=""></option>
-                <option value="KG">KG</option>
-                <option value="UN">UN</option>
-              </select>
-              {errors.medida && <p className="text-red-500 text-sm text-center">{errors.medida.message}</p>}
-            </div> */}
           </div>
         )}
 
@@ -229,6 +215,15 @@ function PosterForm() {
           <a href={downloadUrl} target="_blank" className="flex items-center mt-4">
             <FormButton text={<MdDownload className="mr-1 text-xl" />} />
           </a>
+          <div className="text-center mt-4">
+            <FormButton
+              onClick={() => {
+                setDownloadUrl("");
+                setReqResponse("");
+              }}
+              text="Criar outro cartaz" />
+
+          </div>
         </div>
       )}
 

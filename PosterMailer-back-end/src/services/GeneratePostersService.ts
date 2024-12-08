@@ -113,14 +113,12 @@ class GeneratePostersService {
     const content: Content[] = [];
 
     for (let i = 0; i < data.length; i += 2) {
-      console.log(i);
       const row = data[i];
       const nextRow = data[i + 1] ? data[i + 1] : null;
 
       console.log(nextRow);
 
       if (nextRow) {
-        console.log('entrou no nextRow');
         const pageContent: Content = {
           stack: [
             {
@@ -148,6 +146,17 @@ class GeneratePostersService {
               alignment: "right",
               absolutePosition: { x: 0, y: 335 },
             },
+            ...(row.limite
+              ? [
+                {
+                  text: `LIMITADO A ${row.limite} POR CLIENTE`,
+                  fontSize: 12,
+                  bold: true,
+                  alignment: "center",
+                  absolutePosition: { x: 280, y: 370 },
+                } as Content,
+              ]
+              : []),
             {
               text: nextRow.produto,
               fontSize: 37,
@@ -158,20 +167,32 @@ class GeneratePostersService {
               text: "R$",
               fontSize: 20,
               alignment: "left",
-              absolutePosition: { x: 280, y: 755 },
+              absolutePosition: { x: 280, y: 745 },
             },
             {
               text: nextRow.preco,
               fontSize: 76,
               alignment: "center",
-              absolutePosition: { x: 280, y: 696 },
+              absolutePosition: { x: 280, y: 688 },
             },
             {
               text: nextRow.medida,
               fontSize: 20,
               alignment: "right",
-              absolutePosition: { x: 0, y: 755 },
+              absolutePosition: { x: 0, y: 745 },
             },
+            ...(nextRow.limite
+              ?
+              [
+                {
+                  text: `LIMITADO A ${nextRow.limite} POR CLIENTE`,
+                  fontSize: 12,
+                  bold: true,
+                  alignment: "center",
+                  absolutePosition: { x: 280, y: 780 },
+                } as Content
+              ]
+              : []),
           ],
           margin: [0, 0, 0, 20],
         };
@@ -206,7 +227,18 @@ class GeneratePostersService {
               fontSize: 20,
               alignment: "right",
               absolutePosition: { x: 0, y: 335 },
-            }
+            },
+            ...(row.limite
+              ? [
+                {
+                  text: `LIMITADO A ${row.limite} POR CLIENTE`,
+                  fontSize: 12,
+                  bold: true,
+                  alignment: "center",
+                  absolutePosition: { x: 280, y: 370 },
+                } as Content,
+              ]
+              : []),
           ],
           margin: [0, 0, 0, 20],
         };
