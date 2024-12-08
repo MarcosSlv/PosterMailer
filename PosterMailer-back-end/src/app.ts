@@ -11,6 +11,8 @@ app.use(cors({
 }));
 
 app.use("/pdfs", express.static(path.resolve(__dirname, "../pdfs")));
+app.use('/static', express.static(path.join(__dirname, 'utils')));
+
 
 app.use(express.json({ limit: "20mb" }));
 
