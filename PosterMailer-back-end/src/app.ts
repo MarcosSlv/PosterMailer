@@ -7,7 +7,7 @@ import path from "path";
 export const app = express();
 
 app.use(cors({
-  origin: "https://postermailer.vercel.app/"
+  origin: "https://postermailer-df6cszvh6-marcosslvs-projects.vercel.app"
 }));
 
 app.use("/pdfs", express.static(path.resolve(__dirname, "../pdfs")));
