@@ -58,6 +58,6 @@ PORT=3333
 3. Execute o Projeto:
   ```bash
   cd PosterMailer-front-end
-  yarn dev
+  yarn start
   cd PosterMailer-back-end
-  yarn dev
+  yarn start
