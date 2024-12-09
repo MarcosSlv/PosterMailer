@@ -21,6 +21,7 @@ function PosterForm() {
 
   const fileWatch = watch('file');
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "cartazes");
+  console.log(dataArray);
 
   useEffect(() => {
     setValue("tamanho", "cartaz-grande");
