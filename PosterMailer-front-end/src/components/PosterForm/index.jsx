@@ -16,8 +16,8 @@ function PosterForm() {
   const [downloadUrl, setDownloadUrl] = useState("");
   const [reqResponse, setReqResponse] = useState("");
 
-  const image = "public/assets/images/tabela-modelo-cartazes.png";
-  const modelFilePath = "public/assets/sheets/modelo-cartaz.xlsx";
+  const image = "/assets/images/tabela-modelo-cartazes.png";
+  const modelFilePath = "/assets/sheets/modelo-cartaz.xlsx";
 
   const fileWatch = watch('file');
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "cartazes");
