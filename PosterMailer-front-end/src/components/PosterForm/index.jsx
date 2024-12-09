@@ -147,7 +147,7 @@ function PosterForm() {
               </div>
 
               <div className="flex flex-col items-center w-1/2">
-                <label htmlFor="limite" className="block text-gray-600 mb-2 text-center">Limite</label>
+                <label htmlFor="limite" className="block text-gray-600 mb-1 text-center">Limite</label>
                 <Input
                   type="text"
                   name="limite"
