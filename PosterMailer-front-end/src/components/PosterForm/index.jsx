@@ -42,7 +42,7 @@ function PosterForm() {
         tamanho: data.tamanho, sheet: [
           {
             produto: data.produto,
-            preco: data.preco,
+            preco: data.preco.replace(".",","),
             medida: data.medida,
             limite: data.limite
           }
