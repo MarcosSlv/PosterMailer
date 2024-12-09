@@ -53,7 +53,7 @@ function PosterForm() {
 
       console.log(body);
 
-      const response = await fetch('https://postermailerbackend.vercel.app/api/posters', {
+      const response = await fetch('https://postermailerbackend.onrender.com/api/posters', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
