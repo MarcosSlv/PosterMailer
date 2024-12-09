@@ -58,6 +58,7 @@ function PosterForm() {
       });
 
       const responseData = await response.json();
+      console.log(response.json());
       if (responseData.status === "Success") {
         setDownloadUrl(responseData.download);
         setReqResponse(responseData.message);
