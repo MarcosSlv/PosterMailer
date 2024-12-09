@@ -31,10 +31,6 @@ function PosterForm() {
   const onSubmit = async (data) => {
     setDownloadUrl("");
     setReqResponse("");
-    console.log(data);
-    console.log(typeForm);
-
-    console.log(data.produto);
 
     const body = typeForm === "planilha"
       ? { tamanho: data.tamanho, sheet: dataArray }
