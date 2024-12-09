@@ -15,8 +15,8 @@ function EmailForm() {
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "emails");
   console.log(dataArray);
 
-  const image = "public/assets/images/tabela-modelo-emails.png";
-  const modelFilePath = "public/assets/sheets/modelo-email.xlsx";
+  const image = "/assets/images/tabela-modelo-emails.png";
+  const modelFilePath = "/assets/sheets/modelo-email.xlsx";
 
   useEffect(() => {
     setReqResponse("");
