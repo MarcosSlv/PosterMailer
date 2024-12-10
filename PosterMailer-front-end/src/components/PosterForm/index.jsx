@@ -16,11 +16,12 @@ function PosterForm() {
   const [downloadUrl, setDownloadUrl] = useState("");
   const [reqResponse, setReqResponse] = useState("");
 
-  const image = "public/assets/images/tabela-modelo-cartazes.png";
-  const modelFilePath = "public/assets/sheets/modelo-cartaz.xlsx";
+  const image = "/assets/images/tabela-modelo-cartazes.png";
+  const modelFilePath = "/assets/sheets/modelo-cartaz.xlsx";
 
   const fileWatch = watch('file');
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "cartazes");
+  console.log(dataArray);
 
   console.log(dataArray);
 
@@ -33,10 +34,6 @@ function PosterForm() {
   const onSubmit = async (data) => {
     setDownloadUrl("");
     setReqResponse("");
-    console.log(data);
-    console.log(typeForm);
-
-    console.log(data.produto);
 
     const body = typeForm == "planilha"
       ? { tamanho: data.tamanho, sheet: dataArray }
@@ -44,7 +41,7 @@ function PosterForm() {
         tamanho: data.tamanho, sheet: [
           {
             produto: data.produto,
-            preco: data.preco,
+            preco: data.preco.replace(".", ","),
             medida: data.medida,
             limite: data.limite
           }
@@ -65,8 +62,8 @@ function PosterForm() {
 
       const responseData = await response.json();
       console.log(responseData);
-      setDownloadUrl(responseData.download);
       if (responseData.status === "Success") {
+        setDownloadUrl(responseData.download);
         setReqResponse(responseData.message);
       }
     } catch (err) {
@@ -149,7 +146,7 @@ function PosterForm() {
               </div>
 
               <div className="flex flex-col items-center w-1/2">
-                <label htmlFor="limite" className="block text-gray-600 mb-2 text-center">Limite</label>
+                <label htmlFor="limite" className="block text-gray-600 mb-1 text-center">Limite</label>
                 <Input
                   type="text"
                   name="limite"

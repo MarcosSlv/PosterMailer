@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc",
-    "postbuild": "copyfiles -u 1 src/utils/fonts/**/* dist/utils/fonts/",
+    "build": "tsc && cp -r src/utils/fonts dist/utils",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "dependencies": {
