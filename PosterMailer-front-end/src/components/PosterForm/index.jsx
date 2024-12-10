@@ -22,6 +22,8 @@ function PosterForm() {
   const fileWatch = watch('file');
   const { dataArray, loading: dataLoading, error } = useSheetReader(fileWatch, "cartazes");
 
+  console.log(dataArray);
+
   useEffect(() => {
     setValue("tamanho", "cartaz-grande");
     setDownloadUrl("");
@@ -36,7 +38,7 @@ function PosterForm() {
 
     console.log(data.produto);
 
-    const body = typeForm === "planilha"
+    const body = typeForm == "planilha"
       ? { tamanho: data.tamanho, sheet: dataArray }
       : {
         tamanho: data.tamanho, sheet: [
@@ -53,7 +55,7 @@ function PosterForm() {
 
       console.log(body);
 
-      const response = await fetch('https://postermailerbackend.vercel.app/api/posters', {
+      const response = await fetch('http://localhost:3333/api/posters', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -62,10 +64,10 @@ function PosterForm() {
       });
 
       const responseData = await response.json();
+      console.log(responseData);
+      setDownloadUrl(responseData.download);
       if (responseData.status === "Success") {
-        setDownloadUrl(responseData.download);
         setReqResponse(responseData.message);
-        reset();
       }
     } catch (err) {
       console.error("Erro ao criar cartaz: ", err);
@@ -220,6 +222,7 @@ function PosterForm() {
               onClick={() => {
                 setDownloadUrl("");
                 setReqResponse("");
+                reset();
               }}
               text="Criar outro cartaz" />
 
