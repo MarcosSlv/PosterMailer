@@ -11,11 +11,6 @@ function EmailForm() {
   const image = "/assets/images/tabela-modelo-emails.png";
   const modelFilePath = "/assets/sheets/modelo-email.xlsx";
 
-  useEffect(() => {
-    setReqResponse("");
-  }, [fileWatch]);
-
-
   const openHelpModal = () => setIsModalOpen(true);
   const closeHelpModal = () => setIsModalOpen(false);
 
