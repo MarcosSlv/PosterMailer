@@ -81,6 +81,7 @@ function PosterForm() {
   const handleSizeChange = (value) => {
     setValue("tamanho", value);
     setDownloadUrl("");
+    setIsSubmiting(false);
   };
 
   const openHelpModal = () => {
