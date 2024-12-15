@@ -244,6 +244,7 @@ function PosterForm() {
               onClick={() => {
                 setDownloadUrl("");
                 setReqResponse("");
+                setIsSubmiting(false);
                 reset();
               }}
               text="Criar outro cartaz" />
