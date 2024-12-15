@@ -43,7 +43,7 @@ class GeneratePostersService {
       const pageContent: Content = {
         stack: [
           {
-            text: row.produto,
+            text: this.formatText(row.produto),
             bold: true,
             fontSize: 50,
             alignment: "center",
@@ -122,7 +122,7 @@ class GeneratePostersService {
         const pageContent: Content = {
           stack: [
             {
-              text: row.produto,
+              text: this.formatText(row.produto),
               fontSize: 37,
               alignment: "center",
               absolutePosition: { x: 280, y: 80 },
@@ -158,7 +158,7 @@ class GeneratePostersService {
               ]
               : []),
             {
-              text: nextRow.produto,
+              text: this.formatText(nextRow.produto),
               fontSize: 37,
               alignment: "center",
               absolutePosition: { x: 280, y: 510 },
@@ -204,7 +204,7 @@ class GeneratePostersService {
         const pageContent: Content = {
           stack: [
             {
-              text: row.produto,
+              text: this.formatText(row.produto),
               fontSize: 37,
               alignment: "center",
               absolutePosition: { x: 280, y: 80 },
@@ -258,6 +258,12 @@ class GeneratePostersService {
         bold: true
       },
     };
+  }
+
+  private formatText(produto: string) {
+    const formatedText = produto.split(" ").map(palavra => palavra.length > 10 ? palavra.substring(0, 5) + "." : palavra).join(" ");
+
+    return formatedText;
   }
 }
 
