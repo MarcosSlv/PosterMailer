@@ -194,8 +194,8 @@ function PosterForm() {
                   register={register}
                   validation={{ required: 'O arquivo é obrigatório' }}
                 />
-                {errors.file && <p className="text-red-500 text-sm">{errors.file.message}</p>}
-                {error && <p className="text-red-500 text-sm">{error}</p>}
+                {errors.file && <p className="text-center text-red-500 font-bold text-sm">{errors.file.message}</p>}
+                {error && <p className="text-center text-red-500 font-bold text-sm">{error}</p>}
               </div>
             </motion.div>
           )}
@@ -217,7 +217,7 @@ function PosterForm() {
                 Cartaz Pequeno - A5
               </SegmentedControl.Item>
             </SegmentedControl.Root>
-            {errors.tamanho && <p className="text-red-500 text-sm mt-1">{errors.tamanho.message}</p>}
+            {errors.tamanho && <p className="text-red-500 font-bold text-sm mt-1">{errors.tamanho.message}</p>}
           </div>
         </div>
 
