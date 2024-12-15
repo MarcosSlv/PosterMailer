@@ -1,20 +1,16 @@
 import { useState } from 'react';
-import Header from "../../components/Header";
 import PosterForm from "../../components/PosterForm";
 import EmailForm from "../../components/EmailForm";
 import { SegmentedControl } from "@radix-ui/themes";
+import Header from "../../components/Header";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 function PosterMailer() {
   const [activeForm, setActiveForm] = useState("cartazes");
-  const [fadeTransition, setFadeTransition] = useState(false);
-
 
   const handleFormChange = (value) => {
-    setFadeTransition(true);
-    setTimeout(() => {
-      setActiveForm(value);
-      setFadeTransition(false);
-    }, 160);
+    setActiveForm(value);
   };
 
   return (
@@ -34,9 +30,30 @@ function PosterMailer() {
             </SegmentedControl.Root>
           </div>
           <div className="form-container bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
-            <div className={`transition-opacity duration-300 ${fadeTransition ? 'opacity-0' : 'opacity-100'}`}>
-              {activeForm === 'cartazes' ? <PosterForm /> : <EmailForm />}
-            </div>
+            <AnimatePresence mode="wait">
+              {activeForm === "cartazes" && (
+                <motion.div
+                  key="cartazes"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <PosterForm />
+                </motion.div>
+              )}
+              {activeForm === "emails" && (
+                <motion.div
+                  key="emails"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  <EmailForm />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

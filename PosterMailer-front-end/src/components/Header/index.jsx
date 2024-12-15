@@ -1,11 +1,11 @@
 function Header({ title }) {
   return (
-    <div className="container mx-auto my-5">
+    <div className="container mx-auto my-2">
       <div className="flex justify-center">
         <div className="w-full lg:w-auto">
-          <h1 className="text-center font-bold text-4xl m-4">
+          <h2 className="text-center font-bold text-4xl m-2">
             {title}
-          </h1>
+          </h2>
         </div>
       </div>
     </div>

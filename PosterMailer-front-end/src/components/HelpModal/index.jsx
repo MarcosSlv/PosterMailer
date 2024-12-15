@@ -10,7 +10,7 @@ function HelpModal({ fileDownloadPath, imagePath, onClose }) {
           <h5 className="text-lg font-bold">Layout de importação</h5>
           <RiCloseLargeFill
             onClick={onClose}
-            className="m-1 hover:cursor-pointer hover:text-gray-500 duration-200"
+            className="m-1 hover:text-gray-500 duration-200"
           />
         </div>
         <div className="p-4">
