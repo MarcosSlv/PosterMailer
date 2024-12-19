@@ -67,6 +67,7 @@ function PosterForm() {
       if (responseData.status === "Success") {
         setDownloadUrl(responseData.download);
         setReqResponse(responseData.message);
+        setIsSubmiting(false);
       }
     } catch (err) {
       console.error("Erro ao criar cartaz: ", err);
@@ -75,13 +76,14 @@ function PosterForm() {
 
   const handleTypeChange = (value) => {
     setTypeForm(value);
+    setIsSubmiting(false);
     setDownloadUrl("");
   };
 
   const handleSizeChange = (value) => {
     setValue("tamanho", value);
-    setDownloadUrl("");
     setIsSubmiting(false);
+    setDownloadUrl("");
   };
 
   const openHelpModal = () => {
@@ -223,7 +225,7 @@ function PosterForm() {
 
 
         <div className="text-center">
-          {dataLoading ? (
+          {isSubmiting ? (
             <FormButton type="submit" text={
               <div className="animate-spin inline-block w-6 h-6 border-2 mx-8 border-gray-500 border-t-transparent rounded-full" role="status">
               </div>
